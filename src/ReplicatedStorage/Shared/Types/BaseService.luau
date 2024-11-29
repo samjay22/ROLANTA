@@ -1,7 +1,7 @@
 --!strict
 export type BaseService<T> = {
     Name : string,
-    ServiceId : string,
+    ClassName : string,
 } & T
 
 return 0
