@@ -1,16 +1,15 @@
 --!strict
-local BaseService = require(game.ReplicatedStorage.Shared.Types.BaseService)
 
 local StringMatcher
 
 local Container = {}
 Container.__index = Container
 
-local _createdServices : {BaseService.BaseService<any>} = {}
+local _createdServices : {BaseService<any>} = {}
 
 local function _findService<T>(name : string) : T?
     local foundService : T? = nil
-    for index, value in next, _createdServices do
+    for index, value: BaseService<T> in next, _createdServices do
         if value.Name == name then
             foundService = value
             break
@@ -25,7 +24,7 @@ function Container.new(folder : Folder)
     local self = setmetatable({}, Container)
 
     local strings : {string} = {}
-    for _, serviceModule : ModuleScript in folder do
+    for _, serviceModule : ModuleScript in folder:GetChildren() do
         local name : string = serviceModule.Name
         table.insert(strings, name)
     end
@@ -44,7 +43,10 @@ function Container:GetService<T>(name : string) : T?
         return foundService
     end
 
-    table.insert(_createdServices, manualService and require(manualService) or game:GetService(name))
+    local myService =  (manualService and require(manualService) or game:GetService(name)) :: any
+    table.insert(_createdServices, myService)
+
+    return myService :: T
 end
 
 function Container:FindService<T>(name : string) : T?
@@ -59,8 +61,10 @@ function Container:RegisterService(name : string) : boolean
     local serviceModule : ModuleScript? self.ServiceDirectory:FindFirstChild(name)
     if not serviceModule then
         local closest = StringMatcher:GenerateSuggestion(name)
-        error(`Service under {name} does not exist. {if #closest > 0 then string.format("did you mean: %s", closest) else ""}`)
+        error(`Service under {name} does not exist. {if #closest > 0 then string.format("did you mean: %s", closest :: string) else ""}`)
     end
+
+    return true
 end
 
 return Container

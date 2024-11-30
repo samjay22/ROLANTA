@@ -1,0 +1,2 @@
+--!strict
+return 0
