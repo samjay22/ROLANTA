@@ -1,0 +1,17 @@
+{
+    "ClassName": "Folder",
+    "Children": [
+      {
+        "Name": "RemoteEvent",
+        "ClassName": "RemoteEvent"
+      },
+      {
+        "Name" : "UnreliableEvent",
+        "ClassName" : "UnreliableRemoteEvent"
+      },
+      {
+        "Name" : "RemoteFunction",
+        "ClassName" : "RemoteFunction"
+      }
+    ]
+  }
