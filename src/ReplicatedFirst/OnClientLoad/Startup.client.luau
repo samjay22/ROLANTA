@@ -10,4 +10,5 @@ local containerObject = ServiceContainer.new(Services)
 setmetatable(shared, {__index = containerObject})
 
 --Load rest of data
+require(Modules:WaitForChild("Utilitys"):WaitForChild("GlobalFunctions"))
 require(Local:WaitForChild("CoreClient"))
