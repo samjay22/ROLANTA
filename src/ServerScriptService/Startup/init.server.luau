@@ -12,6 +12,7 @@ setmetatable(shared, {__index = containerObject})
 
 
 --Load all other core functionality
+require(game.ReplicatedStorage.Shared.Instances)
 require(Modules:WaitForChild("Utilitys"):WaitForChild("GlobalFunctions"))
 require(Shared.Modules:WaitForChild("EnumWrapper"))
 require(game.ServerScriptService.PostStartup)

@@ -1,9 +1,9 @@
 --!strict
 --Constructor for tools
-local ToolInstances : {Tool} = game.ReplicatedStorage.Shared.Instances.Tools:GetChildren() :: {any}
+local Instances = require(game.ReplicatedStorage.Shared.Instances)
 
 local ToolsEvents : {[string] : Delegate} = {}
-ToolsEvents.Test = function(player : Player)
+ToolsEvents.M9 = function(player : Player)
     print(player, "test")
 end
 

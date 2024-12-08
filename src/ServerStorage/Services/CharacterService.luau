@@ -1,5 +1,5 @@
 --!strict
-local Players : Players = shared:GetService("Players")
+local Instances = require(game.ReplicatedStorage.Shared.Instances)
 
 local Service = {}
 
@@ -36,14 +36,17 @@ function Service:GetCurrentCharacterForPlayer(player : Player)
 end
 
 function Service:LoadCharacter(player : Player)
-    local characterModelClone : Model = game.ReplicatedStorage.Shared.Instances.Characters.StarterCharacter:Clone()
+    local characterAsset: Asset = Instances.GetAssetFromLibrary("DefaultCharacter")
+    local charaterModel : Model? = characterAsset.Prefab:Clone() :: any
 
     local characterData : Character = {
-        CurrentModel = characterModelClone,
-        CurrentHumanoid = characterModelClone:WaitForChild("Humanoid") :: Humanoid,
+        CurrentModel = charaterModel,
+        CurrentHumanoid = charaterModel:WaitForChild("Humanoid") :: Humanoid,
     }
 
-    characterModelClone.Humanoid.Died:Connect(function()
+    characterData.CurrentHumanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.Subject
+
+    charaterModel.Humanoid.Died:Connect(function()
         Service:CleanupCharacter(player)
     end)
 
@@ -58,9 +61,9 @@ function Service:LoadCharacter(player : Player)
     
     table.insert(CharacterDataMapping, player.UserId)
 
-    game.re
-    characterModelClone.Parent = game.Workspace
-    player.Character = characterModelClone
+    charaterModel.Name = player.Name
+    player.Character = charaterModel
+    charaterModel.Parent = game.Workspace
 end
 
 

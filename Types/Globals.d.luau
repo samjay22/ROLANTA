@@ -25,3 +25,9 @@ declare shared: {
 }
 
 export type Delegate = (...any) -> (...any)
+
+export type Asset = {
+    Prefab : Instance,
+    Id : number,
+    Name : string,
+}
