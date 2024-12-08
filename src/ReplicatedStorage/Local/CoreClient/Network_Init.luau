@@ -1,7 +1,7 @@
 --!strict
 local NetworkController = require(game.ReplicatedStorage.Shared.Modules.NetworkController)
 
-local networkObject = NetworkController.new(game.ServerStorage.Controllers)
+local networkObject = NetworkController.new(game.ReplicatedStorage.Local.Controllers)
 
 local Remotes = game.ReplicatedStorage.Shared.Remotes
 

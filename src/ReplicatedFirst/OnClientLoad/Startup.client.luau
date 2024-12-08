@@ -11,4 +11,5 @@ setmetatable(shared, {__index = containerObject})
 
 --Load rest of data
 require(Modules:WaitForChild("Utilitys"):WaitForChild("GlobalFunctions"))
+require(Shared.Modules:WaitForChild("EnumWrapper"))
 require(Local:WaitForChild("CoreClient"))
